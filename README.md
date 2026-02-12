@@ -1,4 +1,4 @@
-# Altclick website with Npm + React + Scss + Gsap
+# Altclick website using Npm + React + Scss + Tilt.js
 
 🚀🚀🚀
 

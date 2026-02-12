@@ -1,0 +1,178 @@
+@import '../../styles/variables';
+
+.header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  padding: 1rem 0;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    
+    i {
+      font-size: 1.5rem;
+      color: #4F63F6;
+    }
+  }
+
+  &__logo-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    // Mobile menu styles
+    @media (max-width: 768px) {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      height: 100vh;
+      width: 70%;
+      max-width: 300px;
+      background-color: #fff;
+      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+      flex-direction: column;
+      padding: 5rem 2rem 2rem;
+      transition: right 0.3s ease-in-out;
+      gap: 0;
+
+      &--open {
+        right: 0;
+      }
+    }
+  }
+
+  &__menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__menu-item {
+    @media (max-width: 768px) {
+      width: 100%;
+      border-bottom: 1px solid #f0f0f0;
+    }
+  }
+
+  &__menu-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+    position: relative;
+
+    &:hover {
+      color: #4F63F6;
+    }
+
+    // Underline hover effect for desktop
+    @media (min-width: 769px) {
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #4F63F6;
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      display: block;
+      padding: 1rem 0;
+      font-size: 1rem;
+    }
+  }
+
+  &__cta {
+    background-color: #4F63F6;
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.8rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: #3d4ed9;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(79, 99, 246, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+
+  &__toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    z-index: 1001;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
+  }
+}
+
+// Overlay for mobile menu
+@media (max-width: 768px) {
+  .header__nav--open::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(106, 103, 103, 0.126);
+    z-index: -1;
+  }
+}
