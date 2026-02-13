@@ -97,6 +97,7 @@ const Admission = () => {
             src="/images/application.jpg" 
             alt="Requirements checklist illustration" 
             className="admission__image"
+            loading='lazy'
           />
         </div>
       </div>

@@ -7,6 +7,9 @@ import Admission from './components/Admission/Admission';
 import WhyUs from './components/WhyUs/WhyUs';
 import Application from './components/Application/Application';
 import Contact from './components/Contact/Contact';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import ScrollProgress from './components/ScrollProgress/ScrollProgress';
+import CookieConsent from './components/CookieConsent/CookieConsent';
 import Footer from './components/Footer/Footer';
 
 import './styles/main.scss';
@@ -23,6 +26,9 @@ function App() {
       <WhyUs />
       <Application />
       <Contact />
+      <ScrollToTop />
+      <ScrollProgress/>
+      <CookieConsent />
       <Footer />
     </div>
   );

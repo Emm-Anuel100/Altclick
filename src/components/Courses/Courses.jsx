@@ -85,7 +85,7 @@ const Courses = () => {
               style={{ transitionDelay: `${index * 0.15}s` }}
             >
               <div className="courses__card-image">
-                <img src={course.image} alt={course.title} />
+                <img src={course.image} alt={course.title} loading='lazy' />
               </div>
               <div className="courses__card-content">
                 <h3 className="courses__card-title">{course.title}</h3>

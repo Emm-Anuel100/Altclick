@@ -4,22 +4,25 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Altclick ICT Ltd</title>
-    <meta name="description" content="Altclick ICT Ltd - Innovative technology solutions for your business" />
+    <title>AltClick Tech Academy</title>
+    <meta property="og:description" content="Master coding, design, and data with hands-on training. Secure your future with Nigeria's leading IT school. Applications now open!" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.altclickict.com/" />
-    <meta property="og:title" content="Altclick ICT Ltd" />
-    <meta property="og:description" content="Innovative technology solutions for your business" />
+    <meta property="og:title" content="Altclick Tech Academy" />
+    <meta property="og:description" content="Master coding, design, and data with hands-on training. Secure your future with Nigeria's leading IT school. Applications now open!" />
     <meta property="og:image" content="https://www.altclickict.com/og_image/og_image.png" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://www.altclickict.com/" />
-    <meta name="twitter:title" content="Altclick ICT Ltd" />
-    <meta name="twitter:description" content="Innovative technology solutions for your business" />
-    <meta name="twitter:image" content="https://www.altclickict.com/og_image.png" />
+    <meta name="twitter:title" content="Altclick Tech Academy" />
+    <meta name="twitter:description" content="Learn Web Development, UI/UX, and Data Analysis from industry experts. Practical projects, mentorship, and career support." />
+    <meta name="twitter:image" content="https://www.altclickict.com/og_image/og_image.png" />
 
     <!-- font awesome cdn link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -29,4 +32,17 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
+
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  
+  // Default consent to denied
+  gtag('consent', 'default', {
+    'analytics_storage': 'denied'
+  });
+  
+  gtag('js', new Date());
+  gtag('config', 'GA_MEASUREMENT_ID');
+</script>
 </html>

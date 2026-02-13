@@ -1,0 +1,7 @@
+# Allow all crawlers full access
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.altclickict.com/sitemap.xml
+

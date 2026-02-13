@@ -11,6 +11,9 @@ const Contact = () => {
     message: '',
   });
 
+  // Add Errors State
+  const [errors, setErrors] = useState({});
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -18,9 +21,7 @@ const Contact = () => {
           setIsVisible(true);
         }
       },
-      {
-        threshold: 0.1,
-      }
+      { threshold: 0.1 }
     );
 
     if (sectionRef.current) {
@@ -40,14 +41,39 @@ const Contact = () => {
       ...prev,
       [name]: value,
     }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
   };
 
+  // Updated HandleSubmit with validation
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    let newErrors = {};
+
+    // Manual validation checks
+    if (!formData.name.trim()) newErrors.name = "Please enter your name";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email";
+    }
+    if (!formData.message.trim()) newErrors.message = "Message cannot be empty";
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return; // Stop here if there are errors
+    }
+
+    // log data
     console.log('Contact form submitted:', formData);
-    // Form submission logic here
-    alert('Message sent!');
+    alert('Message sent successfully!');
+
+    // Clear everything
     setFormData({ name: '', email: '', message: '' });
+    setErrors({});
   };
 
   const contactInfo = [
@@ -74,12 +100,11 @@ const Contact = () => {
   return (
     <section className="contact" id="contact" ref={sectionRef}>
       <div className="contact__container">
-        {/* Left Content - Contact Info */}
+        {/* Left Content */}
         <div className={`contact__info ${isVisible ? 'contact__info--visible' : ''}`}>
           <h2 className="contact__title">Get in Touch</h2>
           <p className="contact__subtitle">Have questions? Visit us or drop a message.</p>
 
-          {/* Contact Details */}
           <div className="contact__details">
             {contactInfo.map((info, index) => (
               <div
@@ -93,9 +118,7 @@ const Contact = () => {
                 <div className="contact__detail-text">
                   <h3 className="contact__detail-title">{info.title}</h3>
                   {info.details.map((detail, idx) => (
-                    <p key={idx} className="contact__detail-line">
-                      {detail}
-                    </p>
+                    <p key={idx} className="contact__detail-line">{detail}</p>
                   ))}
                 </div>
               </div>
@@ -103,61 +126,55 @@ const Contact = () => {
           </div>
         </div>
 
-        {/* Right Form - Message Form */}
+        {/* Updated Form with dynamic error classes */}
         <div className={`contact__form-wrapper ${isVisible ? 'contact__form-wrapper--visible' : ''}`}>
-          <form className="contact__form" onSubmit={handleSubmit}>
+          <form className="contact__form" onSubmit={handleSubmit} noValidate>
             <h3 className="contact__form-title">Send a Message</h3>
 
-            {/* Name and Email Row */}
             <div className="contact__form-row">
               <div className="contact__form-group">
-                <label htmlFor="name" className="contact__form-label">
-                  NAME
-                </label>
+                <label htmlFor="name" className="contact__form-label">NAME</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className="contact__form-input"
-                  required
+                  className={`contact__form-input ${errors.name ? 'input-error' : ''}`}
+                  placeholder="Your Name"
                 />
+                {errors.name && <span className="error-text">{errors.name}</span>}
               </div>
 
               <div className="contact__form-group">
-                <label htmlFor="email" className="contact__form-label">
-                  EMAIL
-                </label>
+                <label htmlFor="email" className="contact__form-label">EMAIL</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className="contact__form-input"
-                  required
+                  className={`contact__form-input ${errors.email ? 'input-error' : ''}`}
+                  placeholder="email@example.com"
                 />
+                {errors.email && <span className="error-text">{errors.email}</span>}
               </div>
             </div>
 
-            {/* Message */}
             <div className="contact__form-group">
-              <label htmlFor="message" className="contact__form-label">
-                MESSAGE
-              </label>
+              <label htmlFor="message" className="contact__form-label">MESSAGE</label>
               <textarea
                 id="message"
                 name="message"
                 value={formData.message}
                 onChange={handleInputChange}
                 rows="5"
-                className="contact__form-textarea"
-                required
+                className={`contact__form-textarea ${errors.message ? 'input-error' : ''}`}
+                placeholder="How can we help you?"
               ></textarea>
+              {errors.message && <span className="error-text">{errors.message}</span>}
             </div>
 
-            {/* Submit Button */}
             <button type="submit" className="contact__form-submit">
               Send Message
             </button>

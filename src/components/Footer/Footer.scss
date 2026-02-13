@@ -134,11 +134,10 @@
 
   // Google Maps Section
   &__map {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
     height: 350px;
     background-color: #f5f5f5;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
     @media (max-width: $tablet) {
       height: 300px;
@@ -156,7 +155,13 @@
   // Copyright Section
   &__bottom {
     padding: 1.5rem 0;
+    justify-content: center;
+    display: flex !important;
     background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  &__container.footer{
+    display: flex !important;
   }
 
   &__copyright {

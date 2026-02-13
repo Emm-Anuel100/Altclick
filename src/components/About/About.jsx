@@ -73,6 +73,7 @@ const About = () => {
             src={Image_about} 
             alt="Team collaborating at AltClick" 
             className="about__image"
+            loading='lazy'
           />
         </div>
       </div>

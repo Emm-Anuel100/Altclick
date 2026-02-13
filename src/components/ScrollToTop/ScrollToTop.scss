@@ -1,0 +1,57 @@
+@import '../../styles/variables';
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  background-color: $primary-color;
+  color: $white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(79, 99, 246, 0.4);
+  transition: all $transition-base;
+  z-index: 999;
+  animation: fadeInUp 0.3s ease-out;
+
+  i {
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    background-color: $primary-dark;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(79, 99, 246, 0.5);
+  }
+
+  &:active {
+    transform: translateY(-2px);
+  }
+
+  @media (max-width: $mobile) {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 45px;
+    height: 45px;
+
+    i {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

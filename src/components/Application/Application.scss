@@ -131,6 +131,11 @@
 
   &__form-group {
     margin-bottom: 1.25rem;
+
+      .error-text{ //show error text in form
+    color: #ff4b2b;
+    font-size: 12px;
+  }
   }
 
   &__form-label {
@@ -149,7 +154,7 @@
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     background-color: #fafafa;
-    color: $text-primary;
+    color: gray;
     transition: all $transition-base;
 
     &:focus {
@@ -162,6 +167,16 @@
     &::placeholder {
       color: #999;
     }
+  }
+
+
+  &__form-input {
+   transition: all 0.3s ease;
+
+   &.input-error {
+    border-color: #ff4b2b; 
+    background-color: #fffafa; 
+  }
   }
 
   &__form-select {

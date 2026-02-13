@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import Select from 'react-select'; // Import  React select library
 import './Application.scss';
 
 const Application = () => {
@@ -7,6 +8,40 @@ const Application = () => {
   const [hiringRateCount, setHiringRateCount] = useState(0);
   const sectionRef = useRef(null);
 
+  // Define custom styles
+  const customSelectStyles = {
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: 'white',
+      borderColor: '#e1e1e1',
+      color: '#333', // Text color for the box
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      // Background is white, text is dark
+      backgroundColor: state.isSelected ? '#007bff' : state.isFocused ? '#f0f0f0' : 'white',
+      color: state.isSelected ? 'white' : '#333', // Dark text on white background
+      cursor: 'pointer', // Set cursor to pointer
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: '#333', // Text color of the selected item
+    }),
+    menu: (provided) => ({
+      ...provided,
+      backgroundColor: 'white', // Ensure the dropdown menu background is white
+      zIndex: 20
+    })
+  };
+
+  //  Dropdown options
+  const courseOptions = [
+    { value: 'web-development', label: 'Web Development' },
+    { value: 'data-analysis', label: 'Data Analysis' },
+    { value: 'ui-ux-design', label: 'UI/UX Design' },
+    { value: 'graphic-design', label: 'Graphic Design' }
+  ];
+
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -14,6 +49,7 @@ const Application = () => {
     course: '',
   });
 
+  // --- Scroll & Animation Logic
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -21,15 +57,11 @@ const Application = () => {
           setIsVisible(true);
         }
       },
-      {
-        threshold: 0.2,
-      }
+      { threshold: 0.2 }
     );
-
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
-
     return () => {
       if (sectionRef.current) {
         observer.unobserve(sectionRef.current);
@@ -37,40 +69,31 @@ const Application = () => {
     };
   }, []);
 
-  // Counter animation effect
   useEffect(() => {
     if (isVisible) {
-      // Animate graduates counter to 500+
       let graduatesStart = 0;
       const graduatesEnd = 500;
-      const graduatesDuration = 2000; // 2 seconds
-      const graduatesIncrement = graduatesEnd / (graduatesDuration / 16);
-
       const graduatesTimer = setInterval(() => {
-        graduatesStart += graduatesIncrement;
+        graduatesStart += (graduatesEnd / 100);
         if (graduatesStart >= graduatesEnd) {
           setGraduatesCount(graduatesEnd);
           clearInterval(graduatesTimer);
         } else {
           setGraduatesCount(Math.floor(graduatesStart));
         }
-      }, 16);
+      }, 20);
 
-      // Animate hiring rate to 90%
       let hiringStart = 0;
       const hiringEnd = 90;
-      const hiringDuration = 2000;
-      const hiringIncrement = hiringEnd / (hiringDuration / 16);
-
       const hiringTimer = setInterval(() => {
-        hiringStart += hiringIncrement;
+        hiringStart += (hiringEnd / 100);
         if (hiringStart >= hiringEnd) {
           setHiringRateCount(hiringEnd);
           clearInterval(hiringTimer);
         } else {
           setHiringRateCount(Math.floor(hiringStart));
         }
-      }, 16);
+      }, 30);
 
       return () => {
         clearInterval(graduatesTimer);
@@ -78,6 +101,8 @@ const Application = () => {
       };
     }
   }, [isVisible]);
+
+  // --- Form Handlers
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -87,12 +112,44 @@ const Application = () => {
     }));
   };
 
+  // Select handler
+  const handleSelectChange = (selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      course: selectedOption ? selectedOption.value : '',
+    }));
+  };
+
+  const [errors, setErrors] = useState({}); // Set error
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    let newErrors = {};
+
+    // Check if fields are empty
+    if (!formData.fullName.trim()) newErrors.fullName = "Please enter your full name";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
+
+    if (Object.keys(newErrors).length > 0) {
+        setErrors(newErrors);
+        return; // Stop the form from submitting
+    }
+    
+    // Custom validation check 
+    if (!formData.course) {
+      alert('Please select a course to proceed.');
+      return;
+    }
+
+    // log application info
     console.log('Form submitted:', formData);
-    // Alert message 
     alert('Application submitted! We will contact you soon.');
+
+    // Clear everything
     setFormData({ fullName: '', email: '', phone: '', course: '' });
+    setErrors({});
   };
 
   return (
@@ -120,78 +177,74 @@ const Application = () => {
 
         {/* Right Form */}
         <div className={`application__form-wrapper ${isVisible ? 'application__form-wrapper--visible' : ''}`}>
-          <form className="application__form" onSubmit={handleSubmit}>
+          <form className="application__form" onSubmit={handleSubmit} noValidate>
             <h3 className="application__form-title">Application Form</h3>
 
             {/* Full Name */}
             <div className="application__form-group">
-              <label htmlFor="fullName" className="application__form-label">
-                Full Name
-              </label>
-              <input
+                <label htmlFor="fullName" className="application__form-label">Full Name</label>
+                <input
                 type="text"
                 id="fullName"
                 name="fullName"
                 value={formData.fullName}
                 onChange={handleInputChange}
                 placeholder="John Kevin"
-                className="application__form-input"
-                required
-              />
+                // Dynamically add an error class if validation fails
+                className={`application__form-input ${errors.fullName ? 'input-error' : ''}`}
+                />
+                {errors.fullName && <span className="error-text">{errors.fullName}</span>}
             </div>
 
             {/* Email */}
             <div className="application__form-group">
-              <label htmlFor="email" className="application__form-label">
-                Email Address
-              </label>
-              <input
+                <label htmlFor="email" className="application__form-label">Email Address</label>
+                <input
                 type="email"
                 id="email"
                 name="email"
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="john@example.com"
-                className="application__form-input"
-                required
-              />
+                // Dynamically add an error class if validation fails
+                className={`application__form-input ${errors.email ? 'input-error' : ''}`}
+                />
+                {errors.email && <span className="error-text">{errors.email}</span>}
             </div>
 
             {/* Phone */}
             <div className="application__form-group">
-              <label htmlFor="phone" className="application__form-label">
-                Phone Number
-              </label>
-              <input
+                <label htmlFor="phone" className="application__form-label">Phone Number</label>
+                <input
                 type="tel"
                 id="phone"
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
                 placeholder="+234..."
-                className="application__form-input"
-                required
-              />
+                // Dynamically add an error class if validation fails
+                className={`application__form-input ${errors.phone ? 'input-error' : ''}`}
+                />
+                {errors.phone && <span className="error-text">{errors.phone}</span>}
             </div>
 
-            {/* Course */}
+            {/* Course Select */}
             <div className="application__form-group">
               <label htmlFor="course" className="application__form-label">
                 Course of Interest
               </label>
-              <select
+              <Select
                 id="course"
-                name="course"
-                value={formData.course}
-                onChange={handleInputChange}
-                className="application__form-select"
-                required
-              >
-                <option value="">Select a course</option>
-                <option value="web-development">Web Development</option>
-                <option value="data-analysis">Data Analysis</option>
-                <option value="ui-ux-design">UI/UX Design</option>
-              </select>
+                options={courseOptions}
+                onChange={handleSelectChange}
+                // Find correct object based on the string in state
+                value={courseOptions.find(option => option.value === formData.course) || null}
+                placeholder="Select a course..."
+                className="application__form-select-container"
+                classNamePrefix="react-select"
+                styles={customSelectStyles}
+                isSearchable={true}
+              />
             </div>
 
             {/* Submit Button */}

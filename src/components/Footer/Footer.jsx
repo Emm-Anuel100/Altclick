@@ -108,7 +108,7 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="footer__bottom">
-        <div className="footer__container">
+        <div className="footer__container footer">
           <p className="footer__copyright">
             © 2022 - {new Date().getFullYear()} AltClick Tech Academy. All rights reserved. Abuja, Nigeria.
           </p>
