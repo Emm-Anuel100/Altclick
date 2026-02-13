@@ -1,4 +1,4 @@
-# Altclick website using Npm + React + Scss + Tilt.js
+# Altclick website using Npm + React + Scss + Firebase
 
 🚀🚀🚀
 
