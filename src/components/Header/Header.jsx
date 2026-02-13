@@ -18,7 +18,7 @@ const Header = () => {
       <div className="header__container">
         {/* Logo reloads page */}
         <a 
-          href="http://localhost:5173/" 
+          href="https://altclick-94bd1.web.app/" 
           className="header__logo"
         >
           <i className="fa-regular fa-image"></i>
