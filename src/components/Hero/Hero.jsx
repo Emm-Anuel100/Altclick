@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Hero_img from '../../../public/images/hero_image.jpg'
+import Hero_img from '/images/hero_image.jpg'
 import './Hero.scss';
 
 const Hero = () => {

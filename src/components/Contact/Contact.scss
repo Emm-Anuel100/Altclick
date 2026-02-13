@@ -1,0 +1,224 @@
+@import '../../styles/variables';
+
+.contact {
+  padding: 5rem 0;
+  background-color: #ffffff;
+
+  @media (max-width: $tablet) {
+    padding: 4rem 0;
+  }
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+
+    @media (max-width: $tablet) {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s ease-out;
+
+    &--visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: $text-primary;
+    margin: 0;
+
+    @media (max-width: $tablet) {
+      font-size: 2rem;
+    }
+
+    @media (max-width: $mobile) {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.05rem;
+    color: $text-light;
+    margin: -1rem 0 0 0;
+
+    @media (max-width: $tablet) {
+      font-size: 1rem;
+    }
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__detail {
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.6s ease-out;
+
+    &--visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  &__detail-icon {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E8EBFF;
+    border-radius: 10px;
+    color: $primary-color;
+    font-size: 1.25rem;
+  }
+
+  &__detail-text {
+    flex: 1;
+  }
+
+  &__detail-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 0.35rem 0;
+  }
+
+  &__detail-line {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: $text-light;
+    margin: 0;
+  }
+
+  &__form-wrapper {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out 0.2s;
+
+    &--visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__form {
+    background-color: #fafbff;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+
+    @media (max-width: $tablet) {
+      padding: 2rem;
+    }
+  }
+
+  &__form-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 1.5rem 0;
+  }
+
+  &__form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+
+    @media (max-width: $mobile) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__form-group {
+    margin-bottom: 1.25rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__form-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: $text-secondary;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  &__form-input,
+  &__form-textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: $white;
+    color: $text-primary;
+    font-family: inherit;
+    transition: all $transition-base;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(79, 99, 246, 0.1);
+    }
+
+    &::placeholder {
+      color: #999;
+    }
+  }
+
+  &__form-textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  &__form-submit {
+    width: 100%;
+    padding: 1rem;
+    background-color: $text-primary;
+    color: $white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all $transition-base;
+    margin-top: 0.5rem;
+
+    &:hover {
+      background-color: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './About.scss';
-import Image_about from '../../../public/images/about_img.jpg'
+import Image_about from '/images/about_img.jpg'
 
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);

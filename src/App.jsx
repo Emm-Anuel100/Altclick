@@ -2,16 +2,28 @@ import React from 'react';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
+import Courses from './components/Courses/Courses';
+import Admission from './components/Admission/Admission';
+import WhyUs from './components/WhyUs/WhyUs';
+import Application from './components/Application/Application';
+import Contact from './components/Contact/Contact';
+import Footer from './components/Footer/Footer';
 
 import './styles/main.scss';
 
 function App() {
   return (
     <div className="app">
-      {/* Sections */}
+      {/* Components */}
       <Header />
       <Hero />
       <About />
+      <Courses />
+      <Admission />
+      <WhyUs />
+      <Application />
+      <Contact />
+      <Footer />
     </div>
   );
 }

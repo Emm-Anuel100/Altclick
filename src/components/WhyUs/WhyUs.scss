@@ -1,0 +1,130 @@
+@import '../../styles/variables';
+
+.why-us {
+  padding: 5rem 0;
+  background-color: #f8f9fc;
+
+  @media (max-width: $tablet) {
+    padding: 4rem 0;
+  }
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.6s ease-out;
+
+    &--visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  &__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: $text-primary;
+    margin: 0 0 0.75rem 0;
+
+    @media (max-width: $tablet) {
+      font-size: 2rem;
+    }
+
+    @media (max-width: $mobile) {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.05rem;
+    color: $text-light;
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+
+    @media (max-width: $desktop) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: $tablet) {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  &__card {
+    background-color: $white;
+    padding: 2rem 1.5rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s ease-out;
+    opacity: 0;
+    transform: translateY(30px);
+
+    &--visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+
+      .why-us__card-icon {
+        transform: scale(1.1);
+        background-color: $primary-color;
+
+        i {
+          color: $white;
+        }
+      }
+    }
+  }
+
+  &__card-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E8EBFF;
+    border-radius: 12px;
+    transition: all $transition-base;
+
+    i {
+      font-size: 1.75rem;
+      color: $primary-color;
+      transition: color $transition-base;
+    }
+  }
+
+  &__card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0 0 0.75rem 0;
+  }
+
+  &__card-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: $text-light;
+    margin: 0;
+  }
+}

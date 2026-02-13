@@ -16,9 +16,9 @@ const Header = () => {
   return (
     <header className="header">
       <div className="header__container">
-        {/* Logo - clickable, redirects to home */}
+        {/* Logo reloads page */}
         <a 
-          href="#" 
+          href="http://localhost:5173/" 
           className="header__logo"
         >
           <i className="fa-regular fa-image"></i>
